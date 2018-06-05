@@ -30,12 +30,7 @@ using namespace Excel;
 #include <string>
 
 using namespace std;
-
-bool cmd_option_exists(char** begin, char** end, const std::string& option)
-{
-	return std::find(begin, end, option) != end;
-}
-
+ 
 char* get_cmd_option(char ** begin, char ** end, const std::string & option)
 {
 	auto itr = std::find(begin, end, option);
@@ -50,8 +45,8 @@ char* get_cmd_option(char ** begin, char ** end, const std::string & option)
 
 int main(const int argc, char** argv)
 {
-	const auto source_file = "C:\\tmp\\demo\\test.xlsm"; //get_cmd_option(argv, argv + argc, "-s");
-	const auto dest_file = "C:\\tmp\\demo\\test.xlsx"; // get_cmd_option(argv, argv + argc, "-d");
+	const auto source_file = get_cmd_option(argv, argv + argc, "-s");
+	const auto dest_file =  get_cmd_option(argv, argv + argc, "-d");
 
 	if (!source_file || !dest_file)
 	{
@@ -95,7 +90,7 @@ int main(const int argc, char** argv)
 		excel->PutUserControl(VARIANT_FALSE);
 		excel->PutDisplayAlerts(0, VARIANT_FALSE);
 		excel->PutShowWindowsInTaskbar(VARIANT_FALSE);
-		const auto module_name = "...";
+		const auto module_name = "your_init_macros_method_name";
 		excel->Run(module_name);
 
 		//save options
